@@ -1,0 +1,435 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -1312,
+        32
+      ],
+      "id": "d75a6bc1-347d-4416-8561-c2c01afd8f62",
+      "name": "When chat message received",
+      "webhookId": "fd9bb01d-9065-4d7d-b7a2-a83e96c53073"
+    },
+    {
+      "parameters": {
+        "url": "https://www.bleepingcomputer.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -864,
+        -64
+      ],
+      "id": "406a202e-b21e-46f0-b805-6bfa4437bf35",
+      "name": "Bleeping Computer"
+    },
+    {
+      "parameters": {
+        "url": "https://www.aikido.dev/blog/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -864,
+        128
+      ],
+      "id": "8f4a3b17-fe60-45a9-86d8-eb746cdc90fd",
+      "name": "Aikido"
+    },
+    {
+      "parameters": {
+        "url": "https://www.endorlabs.com/blog/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -864,
+        320
+      ],
+      "id": "05c3e9db-2327-4962-a957-14908ec9aa23",
+      "name": "Endor Labs"
+    },
+    {
+      "parameters": {
+        "url": "https://www.stepsecurity.io/blog/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -864,
+        512
+      ],
+      "id": "5e6982e8-1bd2-4ea7-a51a-7d7409c15250",
+      "name": "Stepsecurity"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        -64
+      ],
+      "id": "50ecf238-f567-4fd4-8096-8971f238aa02",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        128
+      ],
+      "id": "f316948f-eff5-4b08-8f86-ca23972365d5",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        320
+      ],
+      "id": "ab8a840c-4c2e-4acf-942c-d509e1baf252",
+      "name": "Limit2"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        512
+      ],
+      "id": "544740bb-e015-4ab5-9af3-2a9ec1af0282",
+      "name": "Limit3"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1497509055340613694",
+          "mode": "list",
+          "cachedResultName": "N8n Test",
+          "cachedResultUrl": "https://discord.com/channels/1497509055340613694"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1497509056863273093",
+          "mode": "list",
+          "cachedResultName": "general",
+          "cachedResultUrl": "https://discord.com/channels/1497509055340613694/1497509056863273093"
+        },
+        "content": "Here are your security news for today",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        32
+      ],
+      "id": "953b102b-4a7a-49e8-b351-f5af07af1f15",
+      "name": "Send a message",
+      "webhookId": "8e20ecbe-efd1-4513-8962-3e155e023f68",
+      "credentials": {
+        "discordBotApi": {
+          "id": "manEDZu8WzlXO4Am",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -416,
+        144
+      ],
+      "id": "843ee797-d2bc-48c6-9c30-fd2e56162a0b",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1497509055340613694",
+          "mode": "list",
+          "cachedResultName": "N8n Test",
+          "cachedResultUrl": "https://discord.com/channels/1497509055340613694"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1497509056863273093",
+          "mode": "list",
+          "cachedResultName": "general",
+          "cachedResultUrl": "https://discord.com/channels/1497509055340613694/1497509056863273093"
+        },
+        "content": "={{ $json.content.parts[0].text.trim() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        384,
+        176
+      ],
+      "id": "710e4c47-6c30-483b-9ff4-2d2c090300bf",
+      "name": "Send a message1",
+      "webhookId": "8e20ecbe-efd1-4513-8962-3e155e023f68",
+      "credentials": {
+        "discordBotApi": {
+          "id": "manEDZu8WzlXO4Am",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "news_batch",
+        "include": "specifiedFields",
+        "fieldsToInclude": "title, link, pubDate, content",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        176
+      ],
+      "id": "22f30eae-c957-4155-815d-6d80cd044a0a",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash-lite",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash-lite"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Role: Senior CTI (Cyber Threat Intelligence) Analyst.\nData Source: Use ONLY the data provided in the news_batch below. Do NOT use your own training data or search the web.\n\nFOCUS AREAS (only report on these):\n- Supply chain attacks: malicious or typosquatted packages on npm, PyPI, RubyGems, crates.io, Maven, NuGet (e.g. axios, pgserve, genie-like package names)\n- Malicious browser extensions targeting developers\n- IDE or coding agent attacks (VS Code, JetBrains, Cursor, Copilot, Claude, etc.)\n- Critical CVEs (CVSS ≥ 9.0) in widely-used developer tools or libraries (e.g. Adobe, Microsoft, OpenSSL, curl, git)\n- Credential theft or backdoor via CI/CD tools, GitHub Actions, or build pipelines\n\nSTRICT IGNORE LIST (do not report these under any circumstances):\n- Opinion pieces, editorials, award announcements\n- Government breaches or geopolitical events\n- Product launches, feature updates, or pricing changes\n- General phishing or social engineering without a technical package/tool vector\n- Data breaches at companies (unless caused by a supply chain or CVE listed above)\n- CVEs in server-side templating engines (Thymeleaf, Twig, etc.) or serialization libs (protobuf, Avro, etc.) UNLESS there is confirmed active exploitation in the wild\n- CVEs where the affected library is NOT a direct developer dependency (imported package, CLI tool, IDE plugin)\n\nRELEVANCE RULES:\n- A CVE only qualifies if the affected library is a direct developer dependency (e.g. a package imported in code, a CLI tool, an IDE plugin) AND CVSS ≥ 9.0\n- Output only items you are HIGHLY CONFIDENT match the focus areas\n- Quality over quantity — 2 strong hits is better than 5 weak ones\n- Never pad the list to reach a higher count\n- If only 1 item matches, output 1. If none match, output SKIP\n\nTask:\n1. Review all titles and content in news_batch.\n2. Filter ONLY items that match the FOCUS AREAS and pass the RELEVANCE RULES.\n3. For each matching item, extract and format as below.\n4. If ZERO items match, respond with only: SKIP\n5. Keep output under 1900 words\n\nOutput Template (repeat for each match, NO extra text outside this format):\n\n🚨 TITLE: [Exact title from news_batch]\n🔗 Link: [Exact link from news_batch]\n📅 Date: [Exact pubDate from news_batch]\n\nnews_batch: {{ JSON.stringify($json.news_batch) }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        32,
+        176
+      ],
+      "id": "07abfed5-34c1-468e-9c2b-2c325cf54c7b",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "LcZAbpUGmepml1MS",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bleeping Computer": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aikido": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Endor Labs": {
+      "main": [
+        [
+          {
+            "node": "Limit2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stepsecurity": {
+      "main": [
+        [
+          {
+            "node": "Limit3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Bleeping Computer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Aikido",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Endor Labs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Stepsecurity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Limit2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Limit3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "635e81b9-26df-435b-8980-eff56eb4cde4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0a999c585b5124512933473e79a6589d5487dab5177c6e93838324f3a8efaa3c"
+  },
+  "id": "SOhSYKJUFkxdX1NW",
+  "tags": []
+}
